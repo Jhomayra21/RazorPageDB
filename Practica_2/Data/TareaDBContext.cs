@@ -10,9 +10,6 @@ namespace Practica_2.Data
 
         }
         public DbSet<Tarea> Tareas { get; set; }//tarea de investigacion 
-        protected TareaDBContext()
-        {
-
-        }
+     
     }
 }

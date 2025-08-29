@@ -1,19 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Practica_2.Data;
+using Practica_2.Models;
 
-namespace Practica_2.Pages;
-
-public class IndexModel : PageModel
+namespace Practica_2.Pages
 {
-    private readonly ILogger<IndexModel> _logger;
-
-    public IndexModel(ILogger<IndexModel> logger)
+    public class IndexModel : PageModel
     {
-        _logger = logger;
-    }
+        private readonly Practica_2.Data.TareaDBContext _context;
 
-    public void OnGet()
-    {
+        public IndexModel(Practica_2.Data.TareaDBContext context)
+        {
+            _context = context;
+        }
 
+        public IList<Tarea> Tarea { get;set; } = default!;
+
+        public async Task OnGetAsync()
+        {
+            Tarea = await _context.Tareas.ToListAsync();
+        }
     }
 }
